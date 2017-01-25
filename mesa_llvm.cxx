@@ -37,7 +37,7 @@ void initGL() {
 }
 
 int main() {
-   dlopenMyLLVM();
    initGL();
+   dlopenMyLLVM();
    return 0;
 }
