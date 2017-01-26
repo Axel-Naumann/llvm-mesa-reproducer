@@ -1,5 +1,5 @@
 #include <iostream>
-#include <cassert>
+#include <stddef.h>
 
 namespace llvm {
 namespace cl {
@@ -14,7 +14,10 @@ namespace cl {
 int StaticInit() {
    llvm::cl::Option dummyOpt;
    int Val = llvm::cl::AddLiteralOption(dummyOpt, "");
-   assert(Val == 42 && "WRONG SYMBOL CALLED!");
+   if (Val != 42) {
+      std::cerr << "WRONG SYMBOL CALLED!\n";
+      exit(1);
+   }
    return 0;
 }
 
