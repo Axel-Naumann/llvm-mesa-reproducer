@@ -1,4 +1,6 @@
 #include <iostream>
+#include <cassert>
+
 namespace llvm {
 namespace cl {
    class Option {};
@@ -9,5 +11,11 @@ namespace cl {
 }
 }
 
-llvm::cl::Option dummyOpt;
-int StaticInit = llvm::cl::AddLiteralOption(dummyOpt, "");
+int StaticInit() {
+   llvm::cl::Option dummyOpt;
+   int Val = llvm::cl::AddLiteralOption(dummyOpt, "");
+   assert(Val == 42 && "WRONG SYMBOL CALLED!");
+   return 0;
+}
+
+int triggerStaticInit = StaticInit();
